@@ -8,20 +8,35 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_liuxsen';
 
   // add your egg config in here
-  config.middleware = [];
+  config.middleware = ['errorHandler','notfoundHandler'];
 
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`
   };
 
+  const sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: 3306,
+    database: 'egg_sequelize',
+    password: '123456'
+  }
+
+  const security = {
+    xframe: {
+      enable: false
+    },
+    csrf: {
+      enable: false
+    }
+  }
+
   // the return config will combines to EggAppConfig
   return {
-    middleware: ['gzip'],
-    // 配置 gzip 中间件的配置
-    gzip: {
-      threshold: 1024, // 小于 1k 的响应体不压缩
-    },
+    middleware: [],
+    sequelize,
+    security,
     ...config,
     ...bizConfig,
   };

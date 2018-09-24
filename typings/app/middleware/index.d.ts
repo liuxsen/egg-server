@@ -2,12 +2,16 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg'; // Make sure ts to import egg declaration at first
+import ErrorHandler from '../../../app/middleware/error_handler';
 import Gzip from '../../../app/middleware/gzip';
+import NotfoundHandler from '../../../app/middleware/notfound_handler';
 import Robot from '../../../app/middleware/robot';
 
 declare module 'egg' {
   interface IMiddleware {
+    errorHandler: typeof ErrorHandler;
     gzip: typeof Gzip;
+    notfoundHandler: typeof NotfoundHandler;
     robot: typeof Robot;
   }
 }
